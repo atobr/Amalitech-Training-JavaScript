@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kumbh Sans">
+
+    <title>Devjobs Web app</title>
+</head>
+<body>
+    <header>
+        <img src="./assets/desktop/bg-pattern-header.svg" alt="header-logo" id="header-image">
+        <div id="top">
+            <h4>devjobs</h4>
+            <div id='display-mode'>
+                <img src="./assets/desktop/icon-sun.svg" title="sun-logo" alt="light-mode">
+                <div id="mode-select">
+                    <div class="check-rectangle"></div>
+                    <div class="check-dot"></div>
+                </div>
+                <img src="./assets/desktop/icon-moon.svg" title="moon-logo" alt="dark-mode">
+            </div>
+        </div>
+        <form id="search-bar">
+            <section class="search-box">
+                <img class="search-logo" src="./assets/desktop/icon-search.svg" title="search-icon" alt="logo">
+                <label for="main-search"></label>
+                <input type="text" placeholder="Filter by title, companies, expertise..." class="input" name="main-search" id="main-search">
+            </section>
+            <div class="border"></div>
+            <section class="search-box">
+                <img class="search-logo" src="./assets/desktop/icon-location.svg" title="location-icon" alt="location-logo">
+                <label for="location-search"></label>
+                <input type="text" placeholder="Filter by location..." class="input" name="location-search" id="location-search">
+            </section>
+            <div class="border"></div>
+            <section class="search-box">
+                <div id="check-box"></div>
+                <img src="./assets/desktop/icon-check.svg" title="check-mark" alt="check-mark" id="check-mark">
+                <h4>Full Time Only</h4>
+                <button type="submit" id="search-button" value="Search">Search</button>
+            </section>
+        </form>
+    </header>
+</body>
+<script  src="script.js"></script>
+</html>

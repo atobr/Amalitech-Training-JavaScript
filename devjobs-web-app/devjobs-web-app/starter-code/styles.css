@@ -1,0 +1,140 @@
+body{
+    background: #F2F2F2;
+    font-family: 'Kumbh Sans';
+    width: 100%;
+    align-content: center;
+    margin: 0 auto 0 auto;
+}
+
+#header-image{
+    width: 100%;
+}
+
+#search-bar{
+    width: 1110px;
+    height: 80px;
+    background: #FFFFFF;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    position: relative;
+    top: -75px;
+}
+
+/* header img{ */
+    /* width: 80%;
+    height: 162px; */
+/* } */
+
+.search-box{
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+#check-box{
+    width: 24px;
+    height: 24px;
+    background: #19202D;
+    mix-blend-mode: normal;
+    opacity: 0.1;
+    border-radius: 3px;
+    margin-right: 26px;
+    z-index: 3;
+}
+#check-mark{
+    position: absolute;
+    margin-left: 5px;
+    z-index: 2;
+    /* opacity: 0; */
+}
+.search-logo{
+    width: auto;
+    height: 24px;
+    padding-right: 16px;
+}
+
+input{
+    font-size: 16px;
+    font-family: 'Kumbh Sans';
+    width: 300px;
+    height: auto;
+    color: #19202D;
+    mix-blend-mode: normal;
+    opacity: 0.5;
+    border-color: transparent;
+}
+
+/* input:active{ */
+    /* border-color: transparent; */
+/* } */
+
+.check-rectangle{
+    width: 48px;
+    height: 24px;
+    background: #FFFFFF;
+    border-radius: 12px;
+}
+
+.check-dot{
+    position: absolute;
+    top: 12px;
+    margin-left: 5px;
+    width: 14px;
+    height: 14px;
+    background: #5964E0;
+    border-radius: 50%;
+}
+
+.border{
+    width: 1px;
+    height: 80px;
+    background: #6E8098;
+    mix-blend-mode: normal;
+    opacity: 0.2;
+}
+
+#search-button{
+    width: 123px;
+    height: 48px;
+    text-align: center;
+    align-self: center;
+    margin-left: 26px;
+    color: white;
+    background: #5964E0;
+    border-radius: 5px;
+    border-color: transparent;
+}
+#search-button:hover, .check-dot:hover, #check-box:hover{
+    background: #939BF4;
+}
+
+#top h4{
+    margin: 0;
+    font-size: 32px;
+    font-weight: 900;
+    color: #FFFFFF;
+}
+
+#display-mode{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 112px;
+    /* height: 24px; */
+} 
+
+#top{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: -115px;
+    margin: auto;
+    z-index: 3;
+    justify-content: space-between;
+    width: 1110px;
+}
