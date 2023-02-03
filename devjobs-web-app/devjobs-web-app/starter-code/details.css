@@ -1,0 +1,130 @@
+body{
+    background: #F2F2F2;
+    font-family: 'Kumbh Sans';
+    width: 100%;
+    align-content: center;
+    margin: 0 auto 0 auto;
+}
+
+#header-image{
+    width: 100%;
+}
+
+#top h4{
+    margin: 0;
+    font-size: 32px;
+    font-weight: 900;
+    color: #FFFFFF;
+}
+
+#display-mode{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 112px;
+} 
+
+.check-rectangle{
+    width: 48px;
+    height: 24px;
+    background: #FFFFFF;
+    border-radius: 12px;
+}
+
+.check-dot{
+    position: absolute;
+    top: 12px;
+    margin-left: 5px;
+    width: 14px;
+    height: 14px;
+    background: #5964E0;
+    border-radius: 50%;
+}
+
+#top{
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    top: -115px;
+    margin: auto;
+    z-index: 3;
+    justify-content: space-between;
+    width: 1110px;
+}
+
+#content{
+    width: 1110px;
+    height: 1132px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 65px 30px;
+    margin: auto;
+    align-items: center;
+}
+
+#information-bar{
+    width: 730px;
+    height: 140px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    position: relative;
+    top: -75px;
+}
+
+#company-site{
+    background: rgba(89, 100, 224, 0.1);
+    mix-blend-mode: normal;
+    border-radius: 5px;
+    height: 48px;
+    width: 147px;
+}
+
+#company-site > p{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #5964E0;
+}
+
+#page-content{
+    margin: 32px auto auto auto;
+    height: auto;
+    width: 730px;
+    background-color: #FFFFFF;
+}
+
+footer{
+    margin-top: 80px;
+    background-color: #FFFFFF;
+    width: 1440px; 
+    height: 96px;
+}
+
+footer > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 730px;
+    height: auto;
+}
+
+.apply{
+    width: 141px;
+    height: 48px;
+    background: #5964E0;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

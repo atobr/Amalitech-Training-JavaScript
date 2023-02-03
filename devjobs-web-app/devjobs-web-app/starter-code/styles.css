@@ -68,10 +68,6 @@ input{
     border-color: transparent;
 }
 
-/* input:active{ */
-    /* border-color: transparent; */
-/* } */
-
 .check-rectangle{
     width: 48px;
     height: 24px;
@@ -108,7 +104,7 @@ input{
     border-radius: 5px;
     border-color: transparent;
 }
-#search-button:hover, .check-dot:hover, #check-box:hover{
+#search-button:hover, .check-dot:hover, #check-box:hover, #load-more:hover{
     background: #939BF4;
 }
 
@@ -125,7 +121,6 @@ input{
     justify-content: space-between;
     align-items: center;
     width: 112px;
-    /* height: 24px; */
 } 
 
 #top{
@@ -137,4 +132,104 @@ input{
     z-index: 3;
     justify-content: space-between;
     width: 1110px;
+}
+
+#content{
+    width: 1110px;
+    height: 1132px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 65px 30px;
+    margin: auto;
+    align-items: center;
+    overflow-y: hidden;
+}
+
+.container{
+    height: 228px;
+    width: 350px;
+    /* width: 286px;
+    height: 147px; */
+    border-radius: 6px;
+    background: #FFFFFF;
+    /* padding: 49px 32px 32px 32px; */
+}
+
+.postedAt, .contract, .company{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #6E8098;
+    margin: 0 0 0 32px;
+    /* width: 88px; */
+}
+
+.contract{
+    margin: 0;
+}
+
+.position{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 25px;
+    color: #19202D;
+    margin: 12px 0 17px 32px;
+    text-decoration: none;
+}
+.position:hover{
+    color: #6E8098;
+}
+
+.location{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #5964E0;
+    margin: 44px 32px 33px 32px;
+}
+
+#content img{
+    margin-top: calc(35%);
+}
+
+.logoDiv{
+    position: relative;
+    top: -25px; 
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin: 0 0 0 32px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.dot{
+    height: 7px;
+    width: 7px;
+    border-radius: 50%;
+    color: black;
+    margin: 0;
+}
+
+.topDetails{
+    display: flex;
+    flex-direction: row;
+    width: 200px;
+    height: 20px;
+    justify-content: space-between;
+}
+
+#load-more{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #FFFFFF;
+    background-color: #5964E0;
+    border-radius: 5px;
+    height: 48px;
+    width: 141px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 56px auto 106px auto;
 }
