@@ -128,3 +128,8 @@ footer > div{
     align-items: center;
     justify-content: center;
 }
+
+#logoDiv2{
+    width: 140px;
+    height: 140px;
+}

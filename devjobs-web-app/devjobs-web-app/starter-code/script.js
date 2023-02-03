@@ -80,6 +80,8 @@ const myObject = webData();
 
 //Adding content to page
 let content = document.getElementById('content');
+let detailsPage;
+let clicked;
 let element = myObject.then((pageData) => {
     for(let i=0; i < pageData.length; i++){
         let container = document.createElement('div');
@@ -111,7 +113,7 @@ let element = myObject.then((pageData) => {
         p3.innerHTML = pageData[i].contract;
         p4.innerHTML = pageData[i].position;
         p4.href = './details.html';
-        // p4.onclick = return pageData[i];
+        p4.target = '_blank';
         p5.innerHTML = pageData[i].company;
         p6.innerHTML = pageData[i].location;
 
@@ -129,14 +131,14 @@ let element = myObject.then((pageData) => {
         content.appendChild(container);
         container.className = 'container';
 
-        console.log(container);
+        clicked = p4.addEventListener('click', () => {
+            console.log(pageData[i]);
+            detailsPage =  pageData[i];
+            return detailsPage;
+        });
     };
-    function getObject(){
-        // console.log(pageData[i]);
-        clicked = pageData[i];
-    };
-    p4.addEventListener('click', getObject());
 });
+// export {clicked, detailsPage};
 
 
 //This block of code display rest of information when 'Load More' button is clicked
@@ -149,12 +151,16 @@ loadMore.addEventListener('click', () => {
 });
 
 
-// //Getting job details
-let clicked;
-console.log(clicked);
+//Posting job details to page
+// let element2 = element.then((detailsPage) => {
+//     console.log(detailsPage);
+//     const pageContent = document.getElementById('page-content');
+//     const headerInfo = document.getElementById('header-info');
+//     const logoDiv = document.createElement('div');
+//     const logo = document.createElement('img');
 
-
-
-const pageContent = document.getElementById('page-content');
-const headerInfo = document.getElementById('header-info');
-
+//     logo.src = detailsPage.logo;
+//     logoDiv.style.backgroundColor = detailsPage.logoBackground;
+//     logoDiv.appendChild(logo);
+//     logoDiv.appendChild(headerInfo);
+// });
