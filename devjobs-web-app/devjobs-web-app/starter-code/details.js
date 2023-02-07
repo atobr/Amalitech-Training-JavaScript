@@ -62,16 +62,16 @@ dark.addEventListener('click', () => {
 
 
 //Fetching Json
-// import {} from './script.js';
+// import {data} from './script.js';
+// console.log(data.position);
 
-let pageData;
 
-const pageContent = document.getElementById('page-content');
-const headerInfo = document.getElementById('header-info');
-const logoDiv = document.createElement('div');
-const logo = document.createElement('img');
+// const pageContent = document.getElementById('page-content');
+// const headerInfo = document.getElementById('header-info');
+// const logoDiv = document.createElement('div');
+// const logo = document.createElement('img');
 
-// logo.src = element.logo;
-// logoDiv.backgroundColor = element.logoBackground;
-logoDiv.appendChild(logo);
-logoDiv.appendChild(headerInfo);
+// // logo.src = element.logo;
+// // logoDiv.backgroundColor = element.logoBackground;
+// logoDiv.appendChild(logo);
+// logoDiv.appendChild(headerInfo);

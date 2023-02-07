@@ -16,11 +16,7 @@ const fullTime = function fullTimeOnlyOn(fullTimeSelect){
         fullTimeSelect.style.zIndex = '1';
         fullTimeSelect.style.opacity = 1;
     }
-}
-
-// check.addEventListener('click', () => {
-//     fullTime(check);
-// });
+};
 
 
 // This section of code activates the dark mode of the page
@@ -30,6 +26,7 @@ const appearance = document.querySelector('body');
 const searchBar = document.getElementById('search-bar');
 const inputDisplay1 = document.querySelectorAll('input')[0];
 const inputDisplay2 = document.querySelectorAll('input')[1];
+
 
 
 //This block of code toggles dark mode and light modes of the page
@@ -53,23 +50,24 @@ const mode = function darkMode(modeSelect){
     }
 }
 
+
 dark.addEventListener('click', () => {
     mode(dark);
-    check.addEventListener('click', () => {
-        fullTime(check);
-    });
+});
+check.addEventListener('click', () => {
+    fullTime(check);
 });
 
 
 //Fetching Json
-let pageData;
+// let pageData;
 const webData = async() =>{
     try{
         const dataInfo = await fetch('./data.json')
         if (dataInfo.ok){
             const data = await dataInfo.json();
             console.log(data);
-            pageData = data;
+            // let pageData = data;
             return data;
         }
     } catch (error){
@@ -80,9 +78,8 @@ const myObject = webData();
 
 //Adding content to page
 let content = document.getElementById('content');
-let detailsPage;
-let clicked;
-let element = myObject.then((pageData) => {
+
+const element = myObject.then((pageData) => {
     for(let i=0; i < pageData.length; i++){
         let container = document.createElement('div');
         let p1 = document.createElement('img');
@@ -130,15 +127,19 @@ let element = myObject.then((pageData) => {
         container.appendChild(p6);
         content.appendChild(container);
         container.className = 'container';
+    };
+});
 
-        clicked = p4.addEventListener('click', () => {
+
+const dataReturn = myObject.then((pageData)=>{
+    for(let i = 0; i < pageData.length; i++){
+        let variable = document.getElementsByClassName('position');
+        variable[i].addEventListener('click', ()=>{
             console.log(pageData[i]);
-            detailsPage =  pageData[i];
-            return detailsPage;
+            return pageData[i];
         });
     };
 });
-// export {clicked, detailsPage};
 
 
 //This block of code display rest of information when 'Load More' button is clicked

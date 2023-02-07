@@ -8,6 +8,7 @@ body{
 
 #header-image{
     width: 100%;
+    height: auto;
 }
 
 #search-bar{
@@ -24,10 +25,9 @@ body{
     top: -75px;
 }
 
-/* header img{ */
-    /* width: 80%;
-    height: 162px; */
-/* } */
+#filter{
+    display: none;
+}
 
 .search-box{
     align-items: center;
@@ -141,6 +141,7 @@ input{
     flex-wrap: wrap;
     gap: 65px 30px;
     margin: auto;
+    padding-top: 25px;
     align-items: center;
     overflow-y: hidden;
 }
@@ -148,11 +149,8 @@ input{
 .container{
     height: 228px;
     width: 350px;
-    /* width: 286px;
-    height: 147px; */
     border-radius: 6px;
     background: #FFFFFF;
-    /* padding: 49px 32px 32px 32px; */
 }
 
 .postedAt, .contract, .company{
@@ -161,19 +159,22 @@ input{
     line-height: 20px;
     color: #6E8098;
     margin: 0 0 0 32px;
-    /* width: 88px; */
+}
+
+.company{
+    margin-top: 17px;
 }
 
 .contract{
     margin: 0;
 }
 
-.position, a{
+.position{
     font-weight: 700;
     font-size: 20px;
     line-height: 25px;
     color: #19202D;
-    margin: 12px 0 17px 32px;
+    margin-left: 32px;
     text-decoration: none;
 }
 .position:hover{
@@ -185,7 +186,7 @@ input{
     font-size: 14px;
     line-height: 17px;
     color: #5964E0;
-    margin: 44px 32px 33px 32px;
+    margin: 41px 32px 0px 32px;
 }
 
 #content img{
@@ -217,6 +218,7 @@ input{
     width: 200px;
     height: 20px;
     justify-content: space-between;
+    margin-bottom: 13px;
 }
 
 #load-more{
@@ -232,4 +234,107 @@ input{
     align-items: center;
     justify-content: center;
     margin: 56px auto 106px auto;
+}
+
+
+/* 
+TABLET SCREEN CODE
+ */
+
+ @media only screen and (min-width: 700px) and (max-width: 900px){
+    #header-image{
+        content: url('./assets/tablet/bg-pattern-header.svg');
+    }
+    #search-bar{
+        width: 689px;
+    }
+    input{
+        width: 160px;
+    }
+    .container{
+        width: 339px;
+        height: 228px;
+    }
+    #content{
+        width: 689px;
+        height: 1700px;
+        gap: 65px 11px;
+    }
+    #top{
+        width: 689px;
+        height: 32px;
+    }
+    .search-box h4::after{
+        content: 'Full Time';
+    }
+    .search-box h4 span{
+        display: none;
+    }
+    #main-search:placeholder-shown{
+        content: 'Filter by title...';
+    }
+    #check-box{
+        margin-right: 16px;
+    }
+    #search-button{
+        width: 80px;
+        height: 48px;
+    }
+ }
+
+
+/* 
+MOBILE SCREEN CODE
+  */
+
+@media only screen and (min-width: 320px) and (max-width: 430px){
+    #header-image{
+        content: url('./assets/mobile/bg-pattern-header.svg');
+        width: 100vw;
+        height: auto;
+    }
+    #search-bar{
+        width: 327px;
+        /* top: -75px; */
+    }
+    input{
+        width: 160px;
+    }
+    .container{
+        width: 327px;
+        height: 228px;
+    }
+    #content{
+        width: 375px;
+        height: 3290px;
+        gap: 49px 0px;
+        justify-content: center;
+    }
+    #top{
+        width: 327px;
+        height: 32px;
+        /* top: -70px; */
+    }
+
+    .border, .search-box~.search-box, .search-box~.search-box~.search-box{
+        display: none;
+    }   
+    #search-button{
+        width: 80px;
+        height: 48px;
+    }
+    #filter{
+        display: inline;
+        margin-left: 30px;
+    }
+    .search-box{
+        display: flex;
+        flex-direction: row-reverse;
+        width: 327px;
+        height: 80px;
+        justify-content: space-evenly;
+    }
+    .search-box input:placeholder-shown{
+        content: 'Filter by title...';
+    }
 }
