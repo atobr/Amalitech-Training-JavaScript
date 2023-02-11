@@ -1,9 +1,15 @@
 body{
-    background: #F2F2F2;
     font-family: 'Kumbh Sans';
     width: 100%;
     align-content: center;
     margin: 0 auto 0 auto;
+}
+
+body.light{
+    background: #F2F2F2;
+}
+body.dark{
+    background: #121721;
 }
 
 #header-image{
@@ -14,7 +20,6 @@ body{
 #search-bar{
     width: 1110px;
     height: 80px;
-    background: #FFFFFF;
     border-radius: 6px;
     display: flex;
     flex-direction: row;
@@ -23,6 +28,15 @@ body{
     margin: auto;
     position: relative;
     top: -75px;
+}
+
+#search-bar.light{
+    background: #FFFFFF;
+    color: #19202D;
+}
+#search-bar.dark{
+    background: #19202D;
+    color: #FFFFFF;
 }
 
 #filter{
@@ -38,23 +52,32 @@ body{
 #check-box{
     width: 24px;
     height: 24px;
-    background: #19202D;
     mix-blend-mode: normal;
     opacity: 0.1;
     border-radius: 3px;
     margin-right: 26px;
     z-index: 3;
 }
+#check-box.light{
+    background-color: #19202D;
+}
+#check-box.dark{
+    background-color: #FFFFFF;
+}
+
 #check-mark{
     position: absolute;
     margin-left: 5px;
     z-index: 2;
-    /* opacity: 0; */
+    /* filter: invert(100%) opacity(0); */
 }
+
+
 .search-logo{
     width: auto;
     height: 24px;
     padding-right: 16px;
+    margin-left: 32px;
 }
 
 input{
@@ -62,11 +85,20 @@ input{
     font-family: 'Kumbh Sans';
     width: 300px;
     height: auto;
-    color: #19202D;
     mix-blend-mode: normal;
     opacity: 0.5;
     border-color: transparent;
 }
+
+input.light{
+    color: #19202D;
+    background-color: #FFFFFF;
+}
+input.dark{
+    color: #FFFFFF;
+    background-color: #19202D;
+}
+
 
 .check-rectangle{
     width: 48px;
@@ -98,7 +130,7 @@ input{
     height: 48px;
     text-align: center;
     align-self: center;
-    margin-left: 26px;
+    margin: 16px 16px 16px 26px;
     color: white;
     background: #5964E0;
     border-radius: 5px;
@@ -150,7 +182,12 @@ input{
     height: 228px;
     width: 350px;
     border-radius: 6px;
+}
+.container.light{
     background: #FFFFFF;
+}
+.container.dark{
+    background: #19202D;
 }
 
 .postedAt, .contract, .company{
@@ -173,9 +210,14 @@ input{
     font-weight: 700;
     font-size: 20px;
     line-height: 25px;
-    color: #19202D;
     margin-left: 32px;
     text-decoration: none;
+}
+.position.light{
+    color: #19202D;
+}
+.position.dark{
+    color: #FFFFFF;
 }
 .position:hover{
     color: #6E8098;

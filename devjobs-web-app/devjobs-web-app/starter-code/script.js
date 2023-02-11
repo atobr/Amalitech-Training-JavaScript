@@ -1,5 +1,4 @@
-// This section of the code activates full time only option of search
-// 
+//Cpde for full time option select
 const check = document.getElementById('check-box');
 const modeSet = document.getElementById('mode-select');
 const checkMark = document.getElementById('check-mark');
@@ -7,67 +6,27 @@ const checkMark = document.getElementById('check-mark');
 const fullTime = function fullTimeOnlyOn(fullTimeSelect){
     if (fullTimeSelect.style.zIndex === '1'){
         check.style.backgroundColor = '#19202D';
-        // check.style.backgroundColor = '#5964E0';
         fullTimeSelect.style.zIndex = '3';
         fullTimeSelect.style.opacity = 0.1;
 } else {
-        // check.style.backgroundColor = '#19202D';
         check.style.backgroundColor = '#5964E0';
         fullTimeSelect.style.zIndex = '1';
         fullTimeSelect.style.opacity = 1;
     }
 };
 
-
-// This section of code activates the dark mode of the page
-// 
-const dark = document.getElementsByClassName('check-dot')[0];
-const appearance = document.querySelector('body');
-const searchBar = document.getElementById('search-bar');
-const inputDisplay1 = document.querySelectorAll('input')[0];
-const inputDisplay2 = document.querySelectorAll('input')[1];
-
-
-
-//This block of code toggles dark mode and light modes of the page
-const mode = function darkMode(modeSelect){
-    if (modeSelect.style.marginLeft === '5px'){
-        dark.style.marginLeft = '30px';
-        appearance.style.backgroundColor = '#121721';
-        searchBar.style.backgroundColor = '#19202D';
-        searchBar.style.color = '#FFFFFF';
-        check.style.backgroundColor = '#FFFFFF';
-        inputDisplay1.style.backgroundColor = '#19202D';
-        inputDisplay2.style.backgroundColor = '#19202D';
-    } else {
-        dark.style.marginLeft = '5px';
-        appearance.style.backgroundColor = '#F2F2F2';
-        searchBar.style.backgroundColor = '#FFFFFF';
-        searchBar.style.color = '#19202D';
-        check.style.backgroundColor = '#19202D';
-        inputDisplay1.style.backgroundColor = '#FFFFFF';
-        inputDisplay2.style.backgroundColor = '#FFFFFF';
-    }
-}
-
-
-dark.addEventListener('click', () => {
-    mode(dark);
-});
 check.addEventListener('click', () => {
     fullTime(check);
 });
 
 
-//Fetching Json
-// let pageData;
+//Fetching data
 const webData = async() =>{
     try{
         const dataInfo = await fetch('./data.json')
         if (dataInfo.ok){
             const data = await dataInfo.json();
             console.log(data);
-            // let pageData = data;
             return data;
         }
     } catch (error){
@@ -94,7 +53,7 @@ const element = myObject.then((pageData) => {
         p1.className = 'logo';
         p2.className = 'postedAt';
         p3.className = 'contract';
-        p4.className = 'position';
+        p4.className = 'position light';
         p5.className = 'company';
         p6.className = 'location';
         dot.className = 'dot';
@@ -110,6 +69,7 @@ const element = myObject.then((pageData) => {
         p3.innerHTML = pageData[i].contract;
         p4.innerHTML = pageData[i].position;
         p4.href = './details.html';
+        p4.value = pageData[i];
         p4.target = '_blank';
         p5.innerHTML = pageData[i].company;
         p6.innerHTML = pageData[i].location;
@@ -126,10 +86,74 @@ const element = myObject.then((pageData) => {
         container.appendChild(p5);
         container.appendChild(p6);
         content.appendChild(container);
-        container.className = 'container';
+        container.className = 'container light';
     };
+    // console.log(document.getElementsByClassName('check-dot')[0]);
+    // return document.getElementsByClassName('check-dot')[0];
 });
 
+//Code for dark mode
+const dark = document.getElementsByClassName('check-dot')[0];
+const mode = function(modeSelect){
+    if (modeSelect.style.marginLeft === '5px'){
+        localStorage.setItem('theme', 'dark');
+        document.querySelector('form').className = 'dark';
+        document.querySelector('body').className = 'dark';
+        document.getElementById('check-box').className = 'dark';
+        dark.style.marginLeft = '30px';
+        const inputSection = document.getElementsByClassName('input');
+        for (let i = 0; i < inputSection.length; i++){
+            inputSection[i].className = 'input dark';
+        };
+        const position = document.getElementsByClassName('position');
+        for (let i = 0; i < position.length; i++){
+            position[i].className = 'position dark';
+        };
+        const jobs = document.getElementsByClassName('container');
+        for (let i = 0; i < jobs.length; i++){
+            jobs[i].className = 'container dark';
+        };
+    } else {
+        localStorage.setItem('theme', 'light');
+        document.querySelector('form').className = 'light';
+        document.querySelector('body').className = 'light';
+        document.getElementById('check-box').className = 'light';
+        dark.style.marginLeft = '5px';
+        const inputSection = document.getElementsByClassName('input');
+        for (let i = 0; i < inputSection.length; i++){
+            inputSection[i].className = 'input light';
+        };
+        const position = document.getElementsByClassName('position');
+        for (let i = 0; i < position.length; i++){
+            position[i].className = 'position light';
+        };
+        const jobs = document.getElementsByClassName('container');
+        for (let i = 0; i < jobs.length; i++){
+            jobs[i].className = 'container light';
+        };
+    };
+};
+dark.addEventListener('click', () => {
+    mode(dark);
+});
+
+//Returning data after search
+const searchButton = document.getElementById('search-button');
+const mainSearch= document.getElementById('main-search').value;
+const locationSearch = document.getElementById('location-search').value;
+    searchButton.addEventListener('click',()=>{        
+        // const search =myObject.then((pageData) => {
+        //     for (let i=0; i < pageData.length; i++){
+        //         if (locationSearch in pageData[i] && mainSearch in pageData[i]){
+        //             console.log(pageData[i]);
+        //             return pageData[i];
+        //         };
+        //     };
+        // });
+        // event.preventDefault();
+        console.log(mainSearch);
+        console.log(locationSearch);
+    });
 
 const dataReturn = myObject.then((pageData)=>{
     for(let i = 0; i < pageData.length; i++){

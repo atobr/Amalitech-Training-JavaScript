@@ -10,7 +10,7 @@
 
     <title>Devjobs Web app</title>
 </head>
-<body>
+<body class="light">
     <header>
         <img src="./assets/desktop/bg-pattern-header.svg" alt="header-logo" id="header-image">
         <div id="top">
@@ -19,30 +19,30 @@
                 <img src="./assets/desktop/icon-sun.svg" title="sun-logo" alt="light-mode">
                 <div id="mode-select">
                     <div class="check-rectangle"></div>
-                    <div class="check-dot"></div>
+                    <div class="check-dot" style = "margin-left:5px"></div>
                 </div>
                 <img src="./assets/desktop/icon-moon.svg" title="moon-logo" alt="dark-mode">
             </div>
         </div>
-        <form id="search-bar">
+        <form id="search-bar" class="light" onsubmit="return false" method="post">
             <section class="search-box">
                 <img class="search-logo" src="./assets/desktop/icon-search.svg" title="search-icon" alt="logo">
                 <label for="main-search"></label>
                 <div id="search-backgroud"></div>
-                <img src="./assets/mobile/icon-filter.svg" id="filter"></div>
-                <input type="text" placeholder="Filter by title, companies, expertise..." class="input" name="main-search" id="main-search">
+                <img src="./assets/mobile/icon-filter.svg" id="filter">
+                <input type="text" placeholder="Filter by title, companies, expertise..." class="input light" name="main-search" id="main-search">
             </section>
             <div class="border"></div>
             <section class="search-box">
                 <img class="search-logo" src="./assets/desktop/icon-location.svg" title="location-icon" alt="location-logo">
                 <label for="location-search"></label>
-                <input type="text" placeholder="Filter by location..." class="input" name="location-search" id="location-search">
+                <input type="text" placeholder="Filter by location..." class="input light" name="location-search" id="location-search">
             </section>
             <div class="border"></div>
             <section class="search-box">
-                <div id="check-box"></div>
+                <div id="check-box" class="light"></div>
                 <img src="./assets/desktop/icon-check.svg" title="check-mark" alt="check-mark" id="check-mark">
-                <h4>
+                <h4 class="light">
                     <span>Full Time Only</span>
                 </h4>
                 <button type="submit" id="search-button" value="Search">Search</button>
