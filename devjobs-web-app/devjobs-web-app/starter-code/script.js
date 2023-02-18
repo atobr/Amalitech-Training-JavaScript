@@ -1,17 +1,20 @@
-//Cpde for full time option select
+//Code for full time option select
 const check = document.getElementById('check-box');
 const modeSet = document.getElementById('mode-select');
 const checkMark = document.getElementById('check-mark');
 
 const fullTime = function fullTimeOnlyOn(fullTimeSelect){
     if (fullTimeSelect.style.zIndex === '1'){
-        check.style.backgroundColor = '#19202D';
         fullTimeSelect.style.zIndex = '3';
         fullTimeSelect.style.opacity = 0.1;
+        checkMark.style.display = 'none';
+        localStorage.setItem('contract', 'part time');
 } else {
-        check.style.backgroundColor = '#5964E0';
+        fullTimeSelect.style.backgroundColor = '#5964E0';
         fullTimeSelect.style.zIndex = '1';
         fullTimeSelect.style.opacity = 1;
+        checkMark.style.display = 'block';
+        localStorage.setItem('contract', 'full time');
     }
 };
 
@@ -37,7 +40,6 @@ const myObject = webData();
 
 //Adding content to page
 let content = document.getElementById('content');
-
 const element = myObject.then((pageData) => {
     for(let i=0; i < pageData.length; i++){
         let container = document.createElement('div');
@@ -53,7 +55,7 @@ const element = myObject.then((pageData) => {
         p1.className = 'logo';
         p2.className = 'postedAt';
         p3.className = 'contract';
-        p4.className = 'position light';
+        p4.className = 'position';
         p5.className = 'company';
         p6.className = 'location';
         dot.className = 'dot';
@@ -68,7 +70,7 @@ const element = myObject.then((pageData) => {
         p2.innerHTML = pageData[i].postedAt;
         p3.innerHTML = pageData[i].contract;
         p4.innerHTML = pageData[i].position;
-        p4.href = './details.html';
+        p4.href = `./details.html?id=${pageData[i].id}`;
         p4.value = pageData[i];
         p4.target = '_blank';
         p5.innerHTML = pageData[i].company;
@@ -88,8 +90,6 @@ const element = myObject.then((pageData) => {
         content.appendChild(container);
         container.className = 'container light';
     };
-    // console.log(document.getElementsByClassName('check-dot')[0]);
-    // return document.getElementsByClassName('check-dot')[0];
 });
 
 //Code for dark mode
@@ -100,6 +100,7 @@ const mode = function(modeSelect){
         document.querySelector('form').className = 'dark';
         document.querySelector('body').className = 'dark';
         document.getElementById('check-box').className = 'dark';
+        document.getElementById('filter').className = 'dark';
         dark.style.marginLeft = '30px';
         const inputSection = document.getElementsByClassName('input');
         for (let i = 0; i < inputSection.length; i++){
@@ -118,6 +119,7 @@ const mode = function(modeSelect){
         document.querySelector('form').className = 'light';
         document.querySelector('body').className = 'light';
         document.getElementById('check-box').className = 'light';
+        document.getElementById('filter').className = 'light';
         dark.style.marginLeft = '5px';
         const inputSection = document.getElementsByClassName('input');
         for (let i = 0; i < inputSection.length; i++){
@@ -137,32 +139,155 @@ dark.addEventListener('click', () => {
     mode(dark);
 });
 
+
+//Maintaining dark/light mode after refresh
+element.then(() =>{
+    if (localStorage.theme === 'dark'){
+        localStorage.setItem('theme', 'dark');
+        document.querySelector('form').className = 'dark';
+        document.querySelector('body').className = 'dark';
+        document.getElementById('check-box').className = 'dark';
+        document.getElementById('filter').className = 'dark';
+        dark.style.marginLeft = '30px';
+        const inputSection = document.getElementsByClassName('input');
+        for (let i = 0; i < inputSection.length; i++){
+            inputSection[i].className = 'input dark';
+        };
+        const position = document.getElementsByClassName('position');
+        for (let i = 0; i < position.length; i++){
+            position[i].className = 'position dark';
+        };
+        const jobs = document.getElementsByClassName('container');
+        for (let i = 0; i < jobs.length; i++){
+            jobs[i].className = 'container dark';
+        };
+    } else {
+        localStorage.setItem('theme', 'light');
+        document.querySelector('form').className = 'light';
+        document.querySelector('body').className = 'light';
+        document.getElementById('check-box').className = 'light';
+        document.getElementById('filter').className = 'light';
+        dark.style.marginLeft = '5px';
+        const inputSection = document.getElementsByClassName('input');
+        for (let i = 0; i < inputSection.length; i++){
+            inputSection[i].className = 'input light';
+        };
+        const position = document.getElementsByClassName('position');
+        for (let i = 0; i < position.length; i++){
+            position[i].className = 'position light';
+        };
+        const jobs = document.getElementsByClassName('container');
+        for (let i = 0; i < jobs.length; i++){
+            jobs[i].className = 'container light';
+        };
+    };
+});
+
 //Returning data after search
 const searchButton = document.getElementById('search-button');
-const mainSearch= document.getElementById('main-search').value;
-const locationSearch = document.getElementById('location-search').value;
-    searchButton.addEventListener('click',()=>{        
-        // const search =myObject.then((pageData) => {
-        //     for (let i=0; i < pageData.length; i++){
-        //         if (locationSearch in pageData[i] && mainSearch in pageData[i]){
-        //             console.log(pageData[i]);
-        //             return pageData[i];
-        //         };
-        //     };
-        // });
-        // event.preventDefault();
-        console.log(mainSearch);
-        console.log(locationSearch);
+searchButton.addEventListener('click',(event)=>{   
+    event.preventDefault();
+
+    //Cleaning old data to make way for new data
+    document.getElementById('search-results').remove();   
+    const searchResultsDiv = document.createElement('div');
+    searchResultsDiv.id = 'search-results';
+    document.querySelector('body').appendChild(searchResultsDiv);
+
+    const mainSearch= document.getElementById('main-search').value.toUpperCase();
+    const locationSearch = document.getElementById('location-search').value.toUpperCase();
+          
+    const search = myObject.then((pageData) => {
+        if (mainSearch !== '' && locationSearch !== ''){
+            let searchData = pageData.filter(data => {
+                return (data.location.toUpperCase() === locationSearch && (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch) && data.contract.toLowerCase() === localStorage.contract);
+            });
+            console.log(searchData);
+            return searchData;
+        } else if(mainSearch === '' && locationSearch !== ''){
+            let searchData = pageData.filter(data => {
+                return (data.location.toUpperCase() === locationSearch && data.contract.toLowerCase() === localStorage.contract);
+            });
+            console.log(searchData);
+            return searchData;
+        } else if(mainSearch !== '' && locationSearch === ''){
+            let searchData = pageData.filter(data => {
+                return (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch);
+            });
+            console.log(searchData);
+            return searchData;
+        } else if(mainSearch === '' && locationSearch === ''){
+            let searchData = pageData.filter(data => {
+                return (data && data.contract.toLowerCase() === localStorage.contract);
+            });
+            console.log(searchData);
+            return searchData;
+        };
     });
 
-const dataReturn = myObject.then((pageData)=>{
-    for(let i = 0; i < pageData.length; i++){
-        let variable = document.getElementsByClassName('position');
-        variable[i].addEventListener('click', ()=>{
-            console.log(pageData[i]);
-            return pageData[i];
-        });
-    };
+    //Display of search results on page
+    search.then((searchData) => {
+        const searchResults = document.getElementById('search-results');
+        document.getElementById('content').style.display = 'none';
+        document.getElementById('load-more').style.display = 'none';
+        document.getElementById('search-results').style.display = 'flex';
+        for(let i=0; i < searchData.length; i++){
+            const container = document.createElement('div');
+            const p1 = document.createElement('img');
+            const p2 = document.createElement('p');
+            const p3 = document.createElement('p');
+            const p4 = document.createElement('a');
+            const p5 = document.createElement('p');
+            const p6 = document.createElement('p');
+            let dot = document.createElement('div');
+    
+            //Setting classes for elements
+            p1.className = 'logo';
+            p2.className = 'postedAt';
+            p3.className = 'contract';
+            p4.className = `position ${localStorage.theme}`;
+            p5.className = 'company';
+            p6.className = 'location';
+            dot.className = 'dot';
+    
+            //Inserting logo
+            const imgDiv = document.createElement('div');
+            imgDiv.className = 'logoDiv';
+            imgDiv.appendChild(p1);
+            imgDiv.style.backgroundColor = searchData[i].logoBackground;
+    
+            p1.src = searchData[i].logo;
+            p2.innerHTML = searchData[i].postedAt;
+            p3.innerHTML = searchData[i].contract;
+            p4.innerHTML = searchData[i].position;
+            p4.href = `./details.html?id=${searchData[i].id}`;
+            p4.value = searchData[i];
+            p4.target = '_blank';
+            p5.innerHTML = searchData[i].company;
+            p6.innerHTML = searchData[i].location;
+    
+            const topDetails = document.createElement('div');
+            topDetails.className = 'topDetails';
+            topDetails.appendChild(p2);
+            topDetails.appendChild(dot);
+            topDetails.appendChild(p3);
+        
+            container.appendChild(imgDiv);
+            container.appendChild(topDetails);
+            container.appendChild(p4);
+            container.appendChild(p5);
+            container.appendChild(p6);
+            searchResults.appendChild(container);
+            container.className = `container ${localStorage.theme}`;
+        };
+    });
+});
+
+//Code for clicking on site icon
+const filter = document.getElementById('filter');
+filter.addEventListener('click', () => {
+    document.getElementById('search-options').style.visibility = 'visible';
+    document.getElementById('search-options').style.opacity = 1;
 });
 
 
@@ -170,22 +295,7 @@ const dataReturn = myObject.then((pageData)=>{
 const loadMore = document.getElementById('load-more');
 loadMore.addEventListener('click', () => {
     content.style.overflow = 'visible';
-    content.style.marginBottom = '200px';
+    content.style.marginBottom = '50px';
     loadMore.style.display = 'none';
     content.style.height = 'fit-content';
 });
-
-
-//Posting job details to page
-// let element2 = element.then((detailsPage) => {
-//     console.log(detailsPage);
-//     const pageContent = document.getElementById('page-content');
-//     const headerInfo = document.getElementById('header-info');
-//     const logoDiv = document.createElement('div');
-//     const logo = document.createElement('img');
-
-//     logo.src = detailsPage.logo;
-//     logoDiv.style.backgroundColor = detailsPage.logoBackground;
-//     logoDiv.appendChild(logo);
-//     logoDiv.appendChild(headerInfo);
-// });

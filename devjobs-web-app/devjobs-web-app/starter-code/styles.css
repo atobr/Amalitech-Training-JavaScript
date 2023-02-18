@@ -70,6 +70,7 @@ body.dark{
     margin-left: 5px;
     z-index: 2;
     /* filter: invert(100%) opacity(0); */
+    display: none;
 }
 
 
@@ -88,6 +89,9 @@ input{
     mix-blend-mode: normal;
     opacity: 0.5;
     border-color: transparent;
+}
+input:focus{
+    margin: transparent;
 }
 
 input.light{
@@ -165,8 +169,12 @@ input.dark{
     justify-content: space-between;
     width: 1110px;
 }
+#search-options{
+    display: flex;
+    flex-direction: row;
+}
 
-#content{
+#content, #search-results{
     width: 1110px;
     height: 1132px;
     display: flex;
@@ -176,6 +184,11 @@ input.dark{
     padding-top: 25px;
     align-items: center;
     overflow-y: hidden;
+}
+
+#search-results{
+    width: 1110px;
+    height: fit-content;
 }
 
 .container{
@@ -231,10 +244,6 @@ input.dark{
     margin: 41px 32px 0px 32px;
 }
 
-#content img{
-    margin-top: calc(35%);
-}
-
 .logoDiv{
     position: relative;
     top: -25px; 
@@ -242,15 +251,16 @@ input.dark{
     height: 50px;
     border-radius: 5px;
     margin: 0 0 0 32px;
-    text-align: center;
-    vertical-align: middle;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .dot{
     height: 7px;
     width: 7px;
-    border-radius: 50%;
-    color: black;
+    /* border-radius: 50%; */
+    color: #6E8098;
     margin: 0;
 }
 
@@ -278,6 +288,11 @@ input.dark{
     margin: 56px auto 106px auto;
 }
 
+#search-options{
+    display: none;
+    flex-direction: column;
+}
+
 
 /* 
 TABLET SCREEN CODE
@@ -297,10 +312,13 @@ TABLET SCREEN CODE
         width: 339px;
         height: 228px;
     }
-    #content{
+    #content, #search-results{
         width: 689px;
         height: 1700px;
         gap: 65px 11px;
+    }
+    #search-results{
+        height: fit-content;
     }
     #top{
         width: 689px;
@@ -312,16 +330,27 @@ TABLET SCREEN CODE
     .search-box h4 span{
         display: none;
     }
-    #main-search:placeholder-shown{
+    #main-search::placeholder{
         content: 'Filter by title...';
     }
     #check-box{
-        margin-right: 16px;
+        margin: auto 16px auto 20px;
+    }
+    .check-dot{
+        top: 10px;
     }
     #search-button{
         width: 80px;
         height: 48px;
+        margin: auto 7px auto 0;
     }
+    .search-logo{
+        margin-left: 24px;
+    }
+    /* .border~.border{
+        position: relative;
+        left: 252px;
+    } */
  }
 
 
@@ -337,25 +366,26 @@ MOBILE SCREEN CODE
     }
     #search-bar{
         width: 327px;
-        /* top: -75px; */
     }
     input{
-        width: 160px;
+        width: 190px;
     }
     .container{
         width: 327px;
         height: 228px;
     }
-    #content{
+    #content, #search-results{
         width: 375px;
         height: 3290px;
         gap: 49px 0px;
         justify-content: center;
     }
+    #search-results{
+        height: fit-content;
+    }
     #top{
         width: 327px;
         height: 32px;
-        /* top: -70px; */
     }
 
     .border, .search-box~.search-box, .search-box~.search-box~.search-box{
@@ -367,7 +397,19 @@ MOBILE SCREEN CODE
     }
     #filter{
         display: inline;
-        margin-left: 30px;
+        margin-right: 10px;
+    }
+    #filter.light{
+        filter: brightness(1) invert(0);
+    }
+    #filter.dark{
+        filter: brightness(0) invert(1);
+    }
+    .search-logo{
+        margin: 0;
+        padding: 0;
+        margin: 14px;
+        filter: brightness(0) invert(1);
     }
     .search-box{
         display: flex;
@@ -376,7 +418,39 @@ MOBILE SCREEN CODE
         height: 80px;
         justify-content: space-evenly;
     }
-    .search-box input:placeholder-shown{
+    .search-box input::placeholder{
         content: 'Filter by title...';
+    }
+    #search-background{
+        width: 48px;
+        height: 48px;
+        background-color: #5964E0;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #load-more{
+        margin: 0 auto 62px auto;
+    }
+    .check-dot{
+        top: 10px;
+    }
+    #search-options{
+        display: flex;
+        flex-direction: column;
+        visibility: hidden;
+        position: fixed;
+        opacity: 0;
+        top: 200px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 327px;
+        height: 127px;
+    }
+    .search-box{
+        display: flex;
+        flex-direction: row;
     }
 }

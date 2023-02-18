@@ -4,6 +4,16 @@ body{
     width: 100%;
     align-content: center;
     margin: 0 auto 0 auto;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 26px;
+    /* color: #6E8098; */
+}
+body.light{
+    background: #F2F2F2;
+}
+body.dark{
+    background: #121721;
 }
 
 #header-image{
@@ -34,7 +44,7 @@ body{
 
 .check-dot{
     position: absolute;
-    top: 12px;
+    top: 7px;
     margin-left: 5px;
     width: 14px;
     height: 14px;
@@ -53,57 +63,177 @@ body{
     width: 1110px;
 }
 
-#content{
-    width: 1110px;
-    height: 1132px;
+#page-content{
     display: flex;
     flex-wrap: wrap;
-    gap: 65px 30px;
     margin: auto;
     align-items: center;
+    padding: 48px 43px 48px 48px;
+    height: auto;
+    width: 639px;
+}
+#page-content.light{
+    background-color: #FFFFFF;
+}
+#page-content.dark{
+    background-color: #19202D;
 }
 
 #information-bar{
     width: 730px;
     height: 140px;
-    background: #FFFFFF;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around;
     margin: auto;
     position: relative;
     top: -75px;
+    border-radius: 6px;
+}
+#information-bar.light{
+    background: #FFFFFF;
+}
+#information-bar.dark{
+    background: #19202D;
+}
+
+#company-name{
+    margin-left: 40px;
+}
+
+#company-logo{
+    width: 140px;
+    height: 140px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    border-radius: 0px 0px 0px 6px;
+}
+.logo{
+    margin: auto;
+    width: 50%;
+    height: auto;
+}
+.company{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 30px;
+}
+.company.light{
+    color: #19202D;
+}
+.company.dark{
+    color: #FFFFFF;
 }
 
 #company-site{
-    background: rgba(89, 100, 224, 0.1);
     mix-blend-mode: normal;
     border-radius: 5px;
     height: 48px;
     width: 147px;
+    margin-left: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#company-site.light{
+    background:rgba(89, 100, 224, 0.1);
+}
+#company-site.dark{
+    background: rgba(255, 255, 255, 0.1);
 }
 
-#company-site > p{
+#company-link{
     font-weight: 700;
     font-size: 16px;
     line-height: 20px;
     text-align: center;
+    text-decoration: none;
+}
+#company-link.light{
     color: #5964E0;
 }
+#company-link.dark{
+    color: #FFFFFF;
+}
 
-#page-content{
-    margin: 32px auto auto auto;
-    height: auto;
-    width: 730px;
-    background-color: #FFFFFF;
+#header-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 639px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.top-info{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: #6E8098;
+    width: max-content;
+}
+.position{
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 35px;
+    margin: 8px auto 14px auto;
+}
+.position.light{
+    color: #19202D;
+}
+.position.dark{
+    color: #FFFFFF;
+}
+
+.location{
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    color: #5964E0;
+}
+.heading{
+    margin: 48px 0 28px 0;
+    font-size: 20px;
+    line-height: 25px;
+    font-weight: 700;
+}
+.heading.light{
+    color: #19202D;
+}
+.heading.dark{
+    color: #FFFFFF;
+}
+
+.description, ul, ol, .site{
+    color: #6E8098;
+}
+
+ol, ul{
+    margin: 0;
+    padding: 0 0 0 15px;
+}
+li::marker{
+    color: #5964E0;
+    font-weight: 700;
 }
 
 footer{
     margin-top: 80px;
     background-color: #FFFFFF;
-    width: 1440px; 
+    width: 100%; 
     height: 96px;
+    align-items: center;
+    display: flex;
+}
+footer.light{
+    background-color: #FFFFFF;
+}
+footer.dark{
+    background-color: #19202D;
 }
 
 footer > div{
@@ -112,6 +242,14 @@ footer > div{
     align-items: center;
     width: 730px;
     height: auto;
+    margin: auto;
+}
+
+#role.light{
+    color: #19202D;
+}
+#role.dark{
+    color:#FFFFFF;
 }
 
 .apply{
@@ -127,9 +265,136 @@ footer > div{
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 #logoDiv2{
     width: 140px;
     height: 140px;
+}
+
+
+/* 
+TABLET SCREEN CODE
+ */
+
+ @media only screen and (min-width: 700px) and (max-width: 900px){
+
+    #header-image{
+        content: url('./assets/tablet/bg-pattern-header.svg');
+    }
+    #top{
+        width: 689px;
+        height: 32px;
+    }
+    #information-bar{
+        margin: auto;
+        width: 689px;
+    }
+    #page-content{
+        width: 603px;
+        margin: auto;
+    }
+    footer div{
+        width: 682px;
+    }
+    footer{
+        margin-top: 53px;
+    }
+    #company-site{
+        display: flex;
+        align-items: center;
+        margin: 46px 40px 46px auto;
+    }
+    .check-dot{
+        top: 10px;
+    }
+ }
+
+
+ /* 
+MOBILE SCREEN CODE
+  */
+
+@media only screen and (min-width: 320px) and (max-width: 430px){
+    #header-image{
+        content: url('./assets/mobile/bg-pattern-header.svg');
+        width: 100vw;
+        height: auto;
+    }
+    #top{
+        width: 327px;
+        height: 32px;
+    }
+    #information-bar{
+        margin: auto;
+        width: 327px;
+        height: 205px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        top: -51px;
+    }
+    #company-site, #company-name{
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+    }
+    #company-name{
+        text-align: center;
+        margin-top: 24px;
+    }
+    .site{
+        margin-top: 10px;
+    }
+    #company-logo{
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+        position: absolute;
+        top: -25px;
+    }
+    #company-site{
+        margin-bottom: 20px;
+    }
+    #page-content{
+        width: 278px;
+        margin: auto;
+        padding: 40px 25px 40px 24px;
+    }
+    #header-info{
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+    #header-info .apply{
+        margin: 50px auto 32px auto;
+        width: 279px;
+    }
+    .position{
+        font-size: 20px;
+    }
+    #role{
+        display: none;
+    }
+    footer div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    footer{
+        display: flex;
+        align-items: center;
+        margin-top: 64px;
+    }
+    footer .apply{
+        width: 327px;
+    }
+    .check-dot{
+        margin-top: 2px;
+    }
+    #role-summary{
+        margin: 0;
+    }
 }

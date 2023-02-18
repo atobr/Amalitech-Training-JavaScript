@@ -1,77 +1,217 @@
-// This section of the code activates full time only option of search
-// 
-const check = document.getElementById('check-box');
-const modeSet = document.getElementById('mode-select');
-const checkMark = document.getElementById('check-mark');
+const pageURL = document.URL;
+const pageID = pageURL.charAt(pageURL.length-1);
 
-const fullTime = function fullTimeOnlyOn(fullTimeSelect){
-    if (fullTimeSelect.style.zIndex === '1'){
-        check.style.backgroundColor = '#19202D';
-        // check.style.backgroundColor = '#5964E0';
-        fullTimeSelect.style.zIndex = '3';
-        fullTimeSelect.style.opacity = 0.1;
-} else {
-        // check.style.backgroundColor = '#19202D';
-        check.style.backgroundColor = '#5964E0';
-        fullTimeSelect.style.zIndex = '1';
-        fullTimeSelect.style.opacity = 1;
+//Fetching data
+const webData = async() =>{
+    try{
+        const dataInfo = await fetch('./data.json')
+        if (dataInfo.ok){
+            const data = await dataInfo.json();
+            console.log(data);
+            return data;
+        }
+    } catch (error){
+        console.log(error);
     }
 }
-
-// check.addEventListener('click', () => {
-//     fullTime(check);
-// });
-
-
-// This section of code activates the dark mode of the page
-// 
-const dark = document.getElementsByClassName('check-dot')[0];
-const appearance = document.querySelector('body');
-const searchBar = document.getElementById('search-bar');
-const inputDisplay1 = document.querySelectorAll('input')[0];
-const inputDisplay2 = document.querySelectorAll('input')[1];
-
-
-//This block of code toggles dark mode and light modes of the page
-const mode = function darkMode(modeSelect){
-    if (modeSelect.style.marginLeft === '5px'){
-        dark.style.marginLeft = '30px';
-        appearance.style.backgroundColor = '#121721';
-        searchBar.style.backgroundColor = '#19202D';
-        searchBar.style.color = '#FFFFFF';
-        check.style.backgroundColor = '#FFFFFF';
-        inputDisplay1.style.backgroundColor = '#19202D';
-        inputDisplay2.style.backgroundColor = '#19202D';
-    } else {
-        dark.style.marginLeft = '5px';
-        appearance.style.backgroundColor = '#F2F2F2';
-        searchBar.style.backgroundColor = '#FFFFFF';
-        searchBar.style.color = '#19202D';
-        check.style.backgroundColor = '#19202D';
-        inputDisplay1.style.backgroundColor = '#FFFFFF';
-        inputDisplay2.style.backgroundColor = '#FFFFFF';
-    }
-}
-
-dark.addEventListener('click', () => {
-    mode(dark);
-    check.addEventListener('click', () => {
-        fullTime(check);
+const myObject = webData();
+const detailsPageData = myObject.then((pageData) =>{
+    const pageObject = pageData.filter(data =>{
+        return data.id === parseInt(pageID);
     });
+    console.log(pageObject);
+    return pageObject;
+});
+
+//Adding content to page
+const pageContent = document.getElementById('page-content');
+const element = detailsPageData.then((pageData) =>{
+    const companyLogo = document.getElementById('company-logo');
+    const companyName = document.getElementById('company-name');
+    const roleSummary = document.getElementById('role-summary');
+    const footerRole = document.getElementById('role');
+    const applyBtn = document.getElementsByClassName('apply');
+    const companySite = document.getElementById('company-link');
+    
+    const logo = document.createElement('img');
+    const company = document.createElement('div');
+    const site = document.createElement('div');
+    const postedAt = document.createElement('div');
+    const contract = document.createElement('div');
+    const topInfo = document.createElement('div');
+    const position = document.createElement('div');
+    const location  = document.createElement('div');
+    const description = document.createElement('div');
+    const heading1 = document.createElement('p');
+    const requirement = document.createElement('div');
+    const heading2 = document.createElement('p');
+    const jobRole = document.createElement('div');
+
+
+    logo.className = 'logo';
+    company.className = 'company';
+    site.className = 'site';
+    postedAt.className = 'posted-at';
+    contract.className = 'contract';
+    topInfo.className = 'top-info';
+    position.className = 'position';
+    location.className = 'location';
+    description.className = 'description';
+    heading1.className = 'heading';
+    requirement.className = 'heading';
+    heading2.className = 'heading';
+    jobRole.className = 'job-role';
+
+
+    site.innerHTML = pageData[0].website; //Company site. eg->scoot.com
+    companyLogo.style.backgroundColor = pageData[0].logoBackground;
+    company.innerHTML = pageData[0].company;
+    logo.src = pageData[0].logo;
+    postedAt.innerHTML = pageData[0].postedAt;
+    contract.innerHTML = pageData[0].contract;
+    position.innerHTML = pageData[0].position;
+    location.innerHTML = pageData[0].location;
+    description.innerHTML = pageData[0].description;
+    heading1.innerHTML = 'Requirements';
+    requirement.innerHTML = pageData[0].requirements.content;
+    const requirementItems = document.createElement('ul');
+    footerRole.innerHTML = pageData[0].position; 
+    for (let i=0; i<pageData[0].requirements.items.length; i++){
+        const item = document.createElement('li');
+        item.innerHTML = pageData[0].requirements.items[i];
+        requirementItems.appendChild(item);
+    };
+    heading2.innerHTML = 'What You Will Do';
+    jobRole.innerHTML = pageData[0].role.content;
+    const jobRoleItems = document.createElement('ol');
+    for (let i=0; i<pageData[0].role.items.length; i++){
+        const item = document.createElement('li');
+        item.innerHTML = pageData[0].role.items[i];
+        jobRoleItems.appendChild(item);
+    };
+    for (let i = 0; i < applyBtn.length; i++){
+        applyBtn[i].href = pageData[0].apply;
+        applyBtn[i].target = '_blank';
+    };
+    companySite.href = pageData[0].website;
+    companySite.target = '_blank';
+
+
+    companyName.appendChild(company);
+    companyName.appendChild(site);
+    companyLogo.appendChild(logo);
+    topInfo.appendChild(postedAt);
+    topInfo.appendChild(contract);
+    roleSummary.appendChild(topInfo);
+    roleSummary.appendChild(position);
+    roleSummary.appendChild(location);
+    pageContent.appendChild(description);
+    pageContent.appendChild(heading1);
+    pageContent.appendChild(requirementItems);
+    pageContent.appendChild(heading2);
+    pageContent.appendChild(jobRoleItems);
 });
 
 
-//Fetching Json
-// import {data} from './script.js';
-// console.log(data.position);
+//Code for dark mode
+const dark = document.getElementsByClassName('check-dot')[0];
+const mode = function(modeSelect){
+    if (modeSelect.style.marginLeft === '5px'){
+        localStorage.setItem('theme', 'dark');
+        document.querySelector('body').className = 'dark';
+        dark.style.marginLeft = '30px';
+        const company = document.getElementsByClassName('company');
+        for (let i = 0; i < company.length; i++){
+            company[i].className = 'company dark';
+        };
+        document.getElementById('company-link').className = 'dark';
+        document.getElementById('page-content').className = 'dark';
+        document.getElementById('information-bar').className = 'dark';
+        document.querySelector('footer').className = 'dark';
+        document.getElementById('role').className = 'dark';
+        const heading = document.getElementsByClassName('heading');
+        for(let i = 0; i < heading.length; i++){
+            heading[i].className = 'heading dark';
+        };
+        const position = document.getElementsByClassName('position');
+        for (let i = 0; i < position.length; i++){
+            position[i].className = 'position dark';
+        };
+    } else {
+        localStorage.setItem('theme', 'light');
+        document.querySelector('body').className = 'light';
+        dark.style.marginLeft = '5px';
+        document.getElementById('company-site').className = 'light';
+        document.getElementById('company-link').className = 'light';
+        const company = document.getElementsByClassName('company');
+        for (let i = 0; i < company.length; i++){
+            company[i].className = 'company light';
+        };
+        document.getElementById('page-content').className = 'light';
+        document.getElementById('information-bar').className = 'light';
+        document.querySelector('footer').className = 'light';
+        document.getElementById('role').className = 'light';
+        const position = document.getElementsByClassName('position');
+        for (let i = 0; i < position.length; i++){
+            position[i].className = 'position light';
+        };
+        const heading = document.getElementsByClassName('heading');
+        for(let i = 0; i < heading.length; i++){
+            heading[i].className = 'heading light';
+        };
+    };
+};
+dark.addEventListener('click', () => {
+    mode(dark);
+});
 
 
-// const pageContent = document.getElementById('page-content');
-// const headerInfo = document.getElementById('header-info');
-// const logoDiv = document.createElement('div');
-// const logo = document.createElement('img');
+//Maintaining dark/light theme after refresh
+element.then(()=>{
+    if (localStorage.theme === 'dark'){
+        localStorage.setItem('theme', 'dark');
+        document.querySelector('body').className = 'dark';
+        dark.style.marginLeft = '30px';
+        document.getElementById('company-site').className = 'dark';
+        document.getElementById('company-link').className = 'dark';
+        const company = document.getElementsByClassName('company');
+        for (let i = 0; i < company.length; i++){
+            company[i].className = 'company dark';
+        };
+        document.getElementById('page-content').className = 'dark';
+        document.getElementById('information-bar').className = 'dark';
+        document.querySelector('footer').className = 'dark';
+        document.getElementById('role').className = 'dark';
+        const heading = document.getElementsByClassName('heading');
+        for (let i = 0; i < heading.length; i++){
+            heading[i].className = 'heading dark';
+        };
+        const position = document.getElementsByClassName('position');
+        for (let i = 0; i < position.length; i++){
+            position[i].className = 'position dark';
+        };
+    } else {
+        localStorage.setItem('theme', 'light');
+        document.querySelector('body').className = 'light';
+        dark.style.marginLeft = '5px';
+        document.getElementById('company-site').className = 'light';
+        document.getElementById('company-link').className = 'light';
+        const company = document.getElementsByClassName('company');
+        for (let i = 0; i < company.length; i++){
+            company[i].className = 'company light';
+        };
+        document.getElementById('page-content').className = 'light';
+        document.getElementById('information-bar').className = 'light';
+        document.querySelector('footer').className = 'light';
+        document.getElementById('role').className = 'light';
+        const position = document.getElementsByClassName('position');
+        for (let i = 0; i < position.length; i++){
+            position[i].className = 'position light';
+        };
+        const heading = document.getElementsByClassName('heading');
+        for(let i = 0; i < heading.length; i++){
+            heading[i].className = 'heading light';
+        };
+    };
+});
 
-// // logo.src = element.logo;
-// // logoDiv.backgroundColor = element.logoBackground;
-// logoDiv.appendChild(logo);
-// logoDiv.appendChild(headerInfo);
