@@ -55,7 +55,7 @@ body.dark{
     mix-blend-mode: normal;
     opacity: 0.1;
     border-radius: 3px;
-    margin-right: 26px;
+    margin: auto 16px auto 32px;
     z-index: 3;
 }
 #check-box.light{
@@ -288,11 +288,6 @@ input.dark{
     margin: 56px auto 106px auto;
 }
 
-#search-options{
-    display: none;
-    flex-direction: column;
-}
-
 
 /* 
 TABLET SCREEN CODE
@@ -449,8 +444,8 @@ MOBILE SCREEN CODE
         width: 327px;
         height: 127px;
     }
-    .search-box{
-        display: flex;
-        flex-direction: row;
+    .border{
+        width: 327px;
+        height: 1px;
     }
 }

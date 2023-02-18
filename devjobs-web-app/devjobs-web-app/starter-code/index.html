@@ -36,37 +36,25 @@
                 <input type="text" placeholder="Filter by title, companies, expertise..." class="input light" name="main-search" id="main-search">
             </section>
             <div class="border"></div>
-            <section class="search-box">
-                <img class="search-logo" src="./assets/desktop/icon-location.svg" title="location-icon" alt="location-logo">
-                <label for="location-search"></label>
-                <input type="text" placeholder="Filter by location..." class="input light" name="location-search" id="location-search">
-            </section>
-            <div class="border"></div>
-            <section class="search-box">
-                <div id="check-box" class="light"></div>
-                <img src="./assets/desktop/icon-check.svg" title="check-mark" alt="check-mark" id="check-mark">
-                <h4 class="light">
-                    <span>Full Time Only</span>
-                </h4>
-                <button type="submit" id="search-button" value="Search">Search</button>
-            </section>
+            
+            <div id="search-options">
+                <section class="search-box">
+                    <img class="search-logo" src="./assets/desktop/icon-location.svg" title="location-icon" alt="location-logo">
+                    <label for="location-search"></label>
+                    <input type="text" placeholder="Filter by location..." class="input light" name="location-search" id="location-search">
+                </section>
+                <div class="border"></div>
+                <section class="search-box">
+                    <div id="check-box" class="light"></div>
+                    <img src="./assets/desktop/icon-check.svg" title="check-mark" alt="check-mark" id="check-mark">
+                    <h4 class="light">
+                        <span>Full Time Only</span>
+                    </h4>
+                    <button type="submit" id="search-button" value="Search">Search</button>
+                </section>
+            </div>    
         </form>
-    </header>
-
-    <div id="search-options" style="visibility: hidden;">
-        <section class="search-box">
-            <img class="search-logo" src="./assets/desktop/icon-location.svg" title="location-icon" alt="location-logo">
-            <label for="location-search"></label>
-            <input type="text" placeholder="Filter by location..." class="input light" name="location-search" id="location-search">
-        </section>
-        <div class="border"></div>
-        <section class="search-box">
-            <div id="check-box" class="light"></div>
-            <img src="./assets/desktop/icon-check.svg" title="check-mark" alt="check-mark" id="check-mark">
-            <h4 class="light">Full Time Only</h4>
-            <button type="submit" id="search-button" value="Search">Search</button>
-        </section>
-    </div>
+    </header> 
 
     <div id="content"></div>
     <div id="search-results"></div>
