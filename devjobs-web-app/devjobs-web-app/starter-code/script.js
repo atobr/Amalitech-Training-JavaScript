@@ -10,7 +10,7 @@ const fullTime = function fullTimeOnlyOn(fullTimeSelect){
         checkMark.style.display = 'none';
         localStorage.setItem('contract', 'part time');
 } else {
-        fullTimeSelect.style.backgroundColor = '#5964E0';
+        document.querySelector(`#check-box.${localStorage.theme}`).style.backgroundColor = '#5964E0';
         fullTimeSelect.style.zIndex = '1';
         fullTimeSelect.style.opacity = 1;
         checkMark.style.display = 'block';
@@ -29,7 +29,6 @@ const webData = async() =>{
         const dataInfo = await fetch('./data.json')
         if (dataInfo.ok){
             const data = await dataInfo.json();
-            console.log(data);
             return data;
         }
     } catch (error){
@@ -101,6 +100,7 @@ const mode = function(modeSelect){
         document.querySelector('body').className = 'dark';
         document.getElementById('check-box').className = 'dark';
         document.getElementById('filter').className = 'dark';
+        document.getElementById('search-options').className = 'dark';
         dark.style.marginLeft = '30px';
         const inputSection = document.getElementsByClassName('input');
         for (let i = 0; i < inputSection.length; i++){
@@ -120,6 +120,7 @@ const mode = function(modeSelect){
         document.querySelector('body').className = 'light';
         document.getElementById('check-box').className = 'light';
         document.getElementById('filter').className = 'light';
+        document.getElementById('search-options').className = 'light';
         dark.style.marginLeft = '5px';
         const inputSection = document.getElementsByClassName('input');
         for (let i = 0; i < inputSection.length; i++){
@@ -148,6 +149,7 @@ element.then(() =>{
         document.querySelector('body').className = 'dark';
         document.getElementById('check-box').className = 'dark';
         document.getElementById('filter').className = 'dark';
+        document.getElementById('search-options').className = 'dark';
         dark.style.marginLeft = '30px';
         const inputSection = document.getElementsByClassName('input');
         for (let i = 0; i < inputSection.length; i++){
@@ -167,6 +169,7 @@ element.then(() =>{
         document.querySelector('body').className = 'light';
         document.getElementById('check-box').className = 'light';
         document.getElementById('filter').className = 'light';
+        document.getElementById('search-options').className = 'light';
         dark.style.marginLeft = '5px';
         const inputSection = document.getElementsByClassName('input');
         for (let i = 0; i < inputSection.length; i++){
@@ -187,7 +190,25 @@ element.then(() =>{
 const searchButton = document.getElementById('search-button');
 searchButton.addEventListener('click',(event)=>{   
     event.preventDefault();
+    searchDisplay();
+    if (localStorage.status === 'on'){
+        document.getElementById('search-options').style.visibility = 'hidden';
+        document.getElementById('backdrop').style.display = 'none';
+        localStorage.status = 'off';
+    }
+});
 
+//Reurn data after search for mobile view
+const mobileSearch = document.getElementById('search-background');
+localStorage.setItem('status', 'off');
+mobileSearch.addEventListener('click', () => {
+    searchDisplay();
+    document.getElementById('search-options').style.visibility = 'hidden';
+});
+
+
+//Function for display of search results
+function searchDisplay(){
     //Cleaning old data to make way for new data
     document.getElementById('search-results').remove();   
     const searchResultsDiv = document.createElement('div');
@@ -200,27 +221,39 @@ searchButton.addEventListener('click',(event)=>{
     const search = myObject.then((pageData) => {
         if (mainSearch !== '' && locationSearch !== ''){
             let searchData = pageData.filter(data => {
-                return (data.location.toUpperCase() === locationSearch && (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch) && data.contract.toLowerCase() === localStorage.contract);
+                if (localStorage.contract === 'full time'){
+                    return (data.location.toUpperCase() === locationSearch && (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch) && data.contract.toLowerCase() === localStorage.contract);
+                } else {
+                    return (data.location.toUpperCase() === locationSearch && (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch));
+                };
             });
-            console.log(searchData);
             return searchData;
         } else if(mainSearch === '' && locationSearch !== ''){
             let searchData = pageData.filter(data => {
-                return (data.location.toUpperCase() === locationSearch && data.contract.toLowerCase() === localStorage.contract);
+                if (localStorage.contract === 'full time'){
+                    return (data.location.toUpperCase() === locationSearch  && data.contract.toLowerCase() === localStorage.contract);
+                } else {
+                    return (data.location.toUpperCase() === locationSearch);
+                };
             });
-            console.log(searchData);
             return searchData;
         } else if(mainSearch !== '' && locationSearch === ''){
             let searchData = pageData.filter(data => {
-                return (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch);
+                if (localStorage.contract === 'full time'){
+                    return ((data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch) && data.contract.toLowerCase() === localStorage.contract);
+                } else {
+                    return (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch);
+                };
             });
-            console.log(searchData);
             return searchData;
         } else if(mainSearch === '' && locationSearch === ''){
             let searchData = pageData.filter(data => {
-                return (data && data.contract.toLowerCase() === localStorage.contract);
+                if (localStorage.contract === 'full time'){
+                    return (data && data.contract.toLowerCase() === localStorage.contract);
+                } else {
+                    return data;
+                };
             });
-            console.log(searchData);
             return searchData;
         };
     });
@@ -281,13 +314,16 @@ searchButton.addEventListener('click',(event)=>{
             container.className = `container ${localStorage.theme}`;
         };
     });
-});
+};
 
 //Code for clicking on site icon
 const filter = document.getElementById('filter');
 filter.addEventListener('click', () => {
     document.getElementById('search-options').style.visibility = 'visible';
     document.getElementById('search-options').style.opacity = 1;
+    document.getElementById('backdrop').style.display = 'block';
+    document.getElementById('main-search').placeholder = 'Enter job desc...';
+    localStorage.setItem('status', 'on');
 });
 
 
@@ -299,3 +335,9 @@ loadMore.addEventListener('click', () => {
     loadMore.style.display = 'none';
     content.style.height = 'fit-content';
 });
+
+//Changing placeholder text
+const tabletScreen = window.matchMedia('(max-width: 768px)');
+if (tabletScreen.matches){
+    document.getElementById('main-search').placeholder = 'Filter by title...';
+};

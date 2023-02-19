@@ -57,6 +57,7 @@ body.dark{
     border-radius: 3px;
     margin: auto 16px auto 32px;
     z-index: 3;
+    /* background-color: transparent!important; */
 }
 #check-box.light{
     background-color: #19202D;
@@ -67,14 +68,14 @@ body.dark{
 
 #check-mark{
     position: absolute;
-    margin-left: 5px;
+    top: 34px;
+    margin: auto 16px auto 37px;
     z-index: 2;
-    /* filter: invert(100%) opacity(0); */
     display: none;
 }
 
 
-.search-logo{
+.search-logo, .location-logo{
     width: auto;
     height: 24px;
     padding-right: 16px;
@@ -91,7 +92,9 @@ input{
     border-color: transparent;
 }
 input:focus{
-    margin: transparent;
+    outline: none;
+    opacity: 1;
+    background-color: none;
 }
 
 input.light{
@@ -287,6 +290,21 @@ input.dark{
     justify-content: center;
     margin: 56px auto 106px auto;
 }
+#option-select{
+    display: flex;
+    flex-direction: row;
+}
+#backdrop{
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.2);
+    display: none;
+}
+#main-search::placeholder::after{
+    content: "Filter by title, companies, expertise...";
+}
 
 
 /* 
@@ -325,7 +343,7 @@ TABLET SCREEN CODE
     .search-box h4 span{
         display: none;
     }
-    #main-search::placeholder{
+    #main-search::placeholder::after{
         content: 'Filter by title...';
     }
     #check-box{
@@ -339,8 +357,11 @@ TABLET SCREEN CODE
         height: 48px;
         margin: auto 7px auto 0;
     }
-    .search-logo{
+    .search-logo, .location-logo{
         margin-left: 24px;
+    }
+    #check-mark{
+        margin-left: 25px;
     }
     /* .border~.border{
         position: relative;
@@ -382,13 +403,10 @@ MOBILE SCREEN CODE
         width: 327px;
         height: 32px;
     }
-
-    .border, .search-box~.search-box, .search-box~.search-box~.search-box{
-        display: none;
-    }   
     #search-button{
         width: 80px;
         height: 48px;
+        margin: 0;
     }
     #filter{
         display: inline;
@@ -408,9 +426,11 @@ MOBILE SCREEN CODE
     }
     .search-box{
         display: flex;
-        flex-direction: row-reverse;
         width: 327px;
         height: 80px;
+    }
+    #search-bar > .search-box{
+        flex-direction: row-reverse;
         justify-content: space-evenly;
     }
     .search-box input::placeholder{
@@ -431,6 +451,12 @@ MOBILE SCREEN CODE
     .check-dot{
         top: 10px;
     }
+    #check-box{
+        margin-left: 0;
+    }
+    #search-options .search-box{
+        height: 72px;
+    }
     #search-options{
         display: flex;
         flex-direction: column;
@@ -438,14 +464,43 @@ MOBILE SCREEN CODE
         position: fixed;
         opacity: 0;
         top: 200px;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        left: auto;
+        right: auto;
         width: 327px;
-        height: 127px;
+        height: 217px;
+        z-index: 999;
+        border-radius: 6px;
+    }
+    #search-options.dark{
+        background-color: #19202D;
+    }
+    #search-options.light{
+        background-color: #FFFFFF;
     }
     .border{
+        display: none;
+    }
+    #search-options .border{
+        display: block;
         width: 327px;
         height: 1px;
+    }
+    #search-options .search-box ~.search-box{
+        justify-content: flex-start;
+        padding-left: 24px;
+    }
+    #search-button{
+        width: 279px;
+        height: 48px;
+    }
+    .location-logo{
+        margin-left: 24px;
+    }
+    #location-search{
+        margin: 0;
+    }
+    #check-mark{
+        top:103px;
+        margin: 0 0 0 5px;
     }
 }
