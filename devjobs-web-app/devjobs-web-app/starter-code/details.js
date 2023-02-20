@@ -1,5 +1,4 @@
-const pageURL = document.URL;
-const pageID = pageURL.charAt(pageURL.length-1);
+const pageID = document.URL.substring(document.URL.lastIndexOf('='), document.URL.length).slice(1);
 
 //Fetching data
 const webData = async() =>{

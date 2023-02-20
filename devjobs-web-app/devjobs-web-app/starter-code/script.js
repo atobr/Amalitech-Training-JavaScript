@@ -325,6 +325,12 @@ filter.addEventListener('click', () => {
     document.getElementById('main-search').placeholder = 'Enter job desc...';
     localStorage.setItem('status', 'on');
 });
+const backdrop = document.getElementById('backdrop');
+backdrop.addEventListener('click', ()=>{
+    backdrop.style.display = 'none';
+    document.getElementById('search-options').style.visibility = 'hidden';
+    document.getElementById('search-options').style.opacity = 0;
+});
 
 
 //This block of code display rest of information when 'Load More' button is clicked

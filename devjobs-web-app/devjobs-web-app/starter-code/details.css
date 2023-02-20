@@ -132,7 +132,7 @@ body.dark{
     border-radius: 5px;
     height: 48px;
     width: 147px;
-    margin-left: 160px;
+    margin: auto 43px auto auto;
     display: flex;
     justify-content: center;
     align-items: center;
