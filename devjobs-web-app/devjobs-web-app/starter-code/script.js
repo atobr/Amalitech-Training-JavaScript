@@ -221,7 +221,7 @@ function searchDisplay(){
         if (mainSearch !== '' && locationSearch !== ''){
             let searchData = pageData.filter(data => {
                 if (localStorage.contract === 'full time'){
-                    return (data.location.toUpperCase().includes(locationSearch) && (data.company.toUpperCase().includes(mainSearch)) || data.position.toUpperCase().includes(mainSearch) && data.contract.toLowerCase().includes(localStorage.contract));
+                    return (data.location.toUpperCase().includes(locationSearch) && (data.company.toUpperCase().includes(mainSearch)) || data.position.toUpperCase().includes(mainSearch) && data.contract.toLowerCase() === localStorage.contract);
                 } else {
                     return (data.location.toUpperCase().includes(locationSearch) && (data.company.toUpperCase().includes(mainSearch) || data.position.toUpperCase().includes(mainSearch)));
                 };
