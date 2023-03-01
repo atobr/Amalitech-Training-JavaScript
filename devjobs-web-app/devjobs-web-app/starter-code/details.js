@@ -6,7 +6,6 @@ const webData = async() =>{
         const dataInfo = await fetch('./data.json')
         if (dataInfo.ok){
             const data = await dataInfo.json();
-            console.log(data);
             return data;
         }
     } catch (error){
@@ -18,7 +17,6 @@ const detailsPageData = myObject.then((pageData) =>{
     const pageObject = pageData.filter(data =>{
         return data.id === parseInt(pageID);
     });
-    console.log(pageObject);
     return pageObject;
 });
 
@@ -90,10 +88,8 @@ const element = detailsPageData.then((pageData) =>{
     };
     for (let i = 0; i < applyBtn.length; i++){
         applyBtn[i].href = pageData[0].apply;
-        applyBtn[i].target = '_blank';
     };
     companySite.href = pageData[0].website;
-    companySite.target = '_blank';
 
 
     companyName.appendChild(company);

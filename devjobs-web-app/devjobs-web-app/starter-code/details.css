@@ -20,11 +20,12 @@ body.dark{
     width: 100%;
 }
 
-#top h4{
+#top a, #top h4{
     margin: 0;
     font-size: 32px;
     font-weight: 900;
     color: #FFFFFF;
+    text-decoration: none;
 }
 
 #display-mode{
@@ -196,7 +197,7 @@ body.dark{
     color: #5964E0;
 }
 .heading{
-    margin: 48px 0 28px 0;
+    margin: 48px auto 28px 0;
     font-size: 20px;
     line-height: 25px;
     font-weight: 700;
@@ -213,6 +214,7 @@ body.dark{
 }
 
 ol, ul{
+    width: 100%;
     margin: 0;
     padding: 0 0 0 15px;
 }

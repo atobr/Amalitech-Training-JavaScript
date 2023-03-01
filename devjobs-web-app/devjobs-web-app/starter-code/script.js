@@ -71,7 +71,6 @@ const element = myObject.then((pageData) => {
         p4.innerHTML = pageData[i].position;
         p4.href = `./details.html?id=${pageData[i].id}`;
         p4.value = pageData[i];
-        p4.target = '_blank';
         p5.innerHTML = pageData[i].company;
         p6.innerHTML = pageData[i].location;
 
@@ -222,27 +221,27 @@ function searchDisplay(){
         if (mainSearch !== '' && locationSearch !== ''){
             let searchData = pageData.filter(data => {
                 if (localStorage.contract === 'full time'){
-                    return (data.location.toUpperCase() === locationSearch && (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch) && data.contract.toLowerCase() === localStorage.contract);
+                    return (data.location.toUpperCase().includes(locationSearch) && (data.company.toUpperCase().includes(mainSearch)) || data.position.toUpperCase().includes(mainSearch) && data.contract.toLowerCase().includes(localStorage.contract));
                 } else {
-                    return (data.location.toUpperCase() === locationSearch && (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch));
+                    return (data.location.toUpperCase().includes(locationSearch) && (data.company.toUpperCase().includes(mainSearch) || data.position.toUpperCase().includes(mainSearch)));
                 };
             });
             return searchData;
         } else if(mainSearch === '' && locationSearch !== ''){
             let searchData = pageData.filter(data => {
                 if (localStorage.contract === 'full time'){
-                    return (data.location.toUpperCase() === locationSearch  && data.contract.toLowerCase() === localStorage.contract);
+                    return (data.location.toUpperCase().includes(locationSearch)  && data.contract.toLowerCase() === localStorage.contract);
                 } else {
-                    return (data.location.toUpperCase() === locationSearch);
+                    return (data.location.toUpperCase().includes(locationSearch));
                 };
             });
             return searchData;
         } else if(mainSearch !== '' && locationSearch === ''){
             let searchData = pageData.filter(data => {
                 if (localStorage.contract === 'full time'){
-                    return ((data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch) && data.contract.toLowerCase() === localStorage.contract);
+                    return ((data.company.toUpperCase().includes(mainSearch) || data.position.toUpperCase().includes(mainSearch)) && data.contract.toLowerCase() === localStorage.contract);
                 } else {
-                    return (data.company.toUpperCase() === mainSearch || data.position.toUpperCase() === mainSearch);
+                    return (data.company.toUpperCase().includes(mainSearch) || data.position.toUpperCase().includes(mainSearch));
                 };
             });
             return searchData;
@@ -295,7 +294,6 @@ function searchDisplay(){
             p4.innerHTML = searchData[i].position;
             p4.href = `./details.html?id=${searchData[i].id}`;
             p4.value = searchData[i];
-            p4.target = '_blank';
             p5.innerHTML = searchData[i].company;
             p6.innerHTML = searchData[i].location;
     
